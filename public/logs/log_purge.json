@@ -1,0 +1,227 @@
+
+{
+    "Command": {
+        "Bundles": {
+            "MultiBundle_1": {
+                "isActive": true,
+                "StartFolder": "AirAddDataPassenger",
+                "CompareFolder": "HotelDetail",
+                "PrefixIgnoreList": [
+                    "Veh",
+                    "Insurance",
+                    "Pkg",
+                    "CrearSolicitudPaquetes",
+                    "PackageReservation"
+                ]
+            },
+            "Flight": {
+                "isActive": true,
+                "StartFolder": "AirAddDataPassenger",
+                "PrefixIgnoreList": [
+                    "Hotel",
+                    "Veh",
+                    "Insurance",
+                    "Pkg",
+                    "CrearSolicitudPaquetes",
+                    "PackageReservation",
+                    "MultiBundle_1"
+                ]
+            },
+            "Hotel": {
+                "isActive": true,
+                "StartFolder": "HotelDetail",
+                "PrefixIgnoreList": [
+                    "Air",
+                    "Flight",
+                    "Veh",
+                    "Insurance",
+                    "Pkg",
+                    "CrearSolicitudPaquetes",
+                    "PackageReservation",
+                    "AddPassenger",
+                    "sendCommand",
+                    "Aplicar_Descuento",
+                    "package",
+                    "MultiBundle_1"
+                ]
+            },
+            "Insurance": {
+                "isActive": true,
+                "StartFolder": "InsuranceBook",
+                "PrefixIgnoreList": [
+                    "Air",
+                    "Flight",
+                    "Veh",
+                    "Pkg",
+                    "CrearSolicitudPaquetes",
+                    "PackageReservation",
+                    "Hotel",
+                    "Aplicar_Descuento",
+                    "sendCommand",
+                    "AddPassengersWithDiscounts",
+                    "package",
+                    "MultiBundle_1"
+                ]
+            },
+            "Vehicle": {
+                "isActive": true,
+                "StartFolder": "VehRes",
+                "PrefixIgnoreList": [
+                    "Air",
+                    "Flight",
+                    "Hotel",
+                    "Insurance",
+                    "Pkg",
+                    "CrearSolicitudPaquetes",
+                    "PackageReservation",
+                    "sendCommand",
+                    "Aplicar_Descuento",
+                    "AddPassengersWithDiscounts",
+                    "package",
+                    "MultiBundle_1"
+                ]
+            },
+            "Package": {
+                "isActive": true,
+                "StartFolder": "CrearSolicitudPaquetes",
+                "PrefixIgnoreList": [
+                    "Air",
+                    "Flight",
+                    "Hotel",
+                    "Insurance",
+                    "Veh",
+                    "sendCommand",
+                    "Aplicar_Descuento",
+                    "AddPassengersWithDiscounts",
+                    "MultiBundle_1"
+                ]
+            },
+            "Cruise": {
+                "isActive": true,
+                "StartFolder": "CruiseReserve",
+                "PrefixIgnoreList": [
+                    "Air",
+                    "Flight",
+                    "Hotel",
+                    "Insurance",
+                    "Veh",
+                    "sendCommand",
+                    "Aplicar_Descuento",
+                    "AddPassengersWithDiscounts",
+                    "MultiBundle_1",
+                    "package",
+                    "Pkg"
+                ]
+            },
+            "CallService": {
+                "isActive": true,
+                "StartFolder": "LlamarCliente"
+            },
+            "Ticket": {
+                "isActive": true,
+                "StartFolder": "ReservarBoletasTayrona"
+            }
+        },
+        "General": {
+            "LogSource": {
+                "dev": {
+                    "FolderName": "C:\\wamp\\www\\geneziSym\\public\\logs\\serviceLogs"
+                },
+                "prod": {
+                    "FolderName": "serviceLogs"
+                }
+            },
+            "LogDestination": {
+                "dev": {
+                    "FolderName": "C:\\wamp\\www\\geneziSym\\public\\logs\\reservationLogs"
+                },
+                "prod": {
+                    "FolderName": "C:\\reservationLogs"
+                }
+            },
+            "PdfLogDestination": {
+                "dev": {
+                    "FolderName": "C:\\wamp\\www\\geneziSym\\public\\logs\\reservationLogs"
+                },
+                "prod": {
+                    "FolderName": "E:\\reservationLogs"
+                }
+            },
+            "FileIgnoreList": [
+                ".",
+                "..",
+                "index.html",
+                "cache"
+            ],
+            "AcceptedNonXmlFolders": {
+                "CashTransaction": {
+                    "extensionToken": "pdf"
+                }
+            },
+            "Search": {
+                "ExtractFolder": "C:\\LogPurgeExport",
+                "SearchByBookingFolders": [
+                    "Flight"
+                ]
+            },
+            "Remote": {
+                "Enabled": false,
+                "serviceLogFolders": {
+                    "dev": {
+                        "Folders": [
+                            "C:\\logPurge\\metasearchServiceLogs"
+                        ]
+                    },
+                    "prod": {
+                        "Folders": [
+                            "E:\\serviceLogs"
+                        ]
+                    }
+                },
+                "tempReservationFolder": {
+                    "dev": {
+                        "Folder": "C:\\logPurge\\RemoteReservation"
+                    },
+                    "prod": {
+                        "Folder": "C:\\ReservationLogs\\RemoteReservation"
+                    }
+                },
+                "URL": {
+                    "domain": {
+                        "dev": "http://www.aviatursym.com",
+                        "prod": "http://www.aviatur.com"
+                    },
+                    "api": {
+                        "oauth": "/oauth/v2/token",
+                        "fetchLogs": "/api/logservice/logreservations/logs/request",
+                        "compressedRepository": "/logreservation"
+                    }
+                },
+                "Authentication": {
+                    "dev": {
+                        "client_id": "10_4fasbcrt36kgkcc8gw84ckcw80c4s00ow0k4goocgckwg0kws",
+                        "client_secret": "2753q33bgw4k8ocwggoskw8488gsg088o880occgo4gokog04g",
+                        "username": "jeus@aviatur.com",
+                        "password": "123456"
+                    },
+                    "prod": {
+                        "client_id": "10_2ldlj5u7cuios8wsco4swgkw00s00gwsckg0sgcs48040c004g",
+                        "client_secret": "3cwu5o34aikgs08sgo0g0k008c4wc4gk84cwswoc00oksw0w08",
+                        "username": "apis@aviatur.com",
+                        "password": "#Avi@AP152016#"
+                    }
+                }
+            }
+        }
+    },
+    "Controller": {
+        "General": {
+            "CompressedFiles": [
+                "FlightAvailResponse"
+            ],
+            "RestrictedFolders": [
+                "emitir_tc_officeid"
+            ]
+        }
+    }
+}

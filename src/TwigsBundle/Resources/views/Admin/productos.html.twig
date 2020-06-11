@@ -1,0 +1,193 @@
+{# empty Twig template #}
+<div role="tabpanel" class="tab-pane fade in active" id="Productos">
+    <div class="row">
+        <div class="form-row col-xs-12 col-sm-12">            
+            <div id="form-row add-product">
+                <h2 class="text-primary text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un producto nuevo</h2>
+                <form role="form" action="{{ path("create_products") }}" method="post" enctype="multipart/form-data">
+                    <div class="form-group col-md-4">
+                        <label>Código de producto</label>
+                        <input type="text" class="form-control"  placeholder="Código" required maxlength="30" name="prod-codigo">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Nombre de producto</label>
+                        <input type="text" class="form-control"  placeholder="Nombre" required maxlength="30" name="prod-name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Categoría</label>
+                        <select class="form-control" name="prod-categoria">
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.Id }}">{{ categoria.Nombre }}</option>
+                            {% endfor %}                                    
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Precio</label>
+                        <input type="text" class="form-control"  placeholder="Precio" required maxlength="20" pattern="[0-9]{1,20}" name="prod-price">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Función</label>
+                        <input type="text" class="form-control"  placeholder="Modelo" required maxlength="30" name="prod-model">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Marca</label>
+                        <input type="text" class="form-control"  placeholder="Marca" required maxlength="30" name="prod-marca">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Unidades disponibles</label>
+                        <input type="text" class="form-control"  placeholder="Unidades" required maxlength="20" pattern="[0-9]{1,20}" name="prod-stock">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Proveedor</label>
+                        <select class="form-control" name="prod-codigoP">
+                            {% for proveedor in proveedores %}
+                                <option value="{{ proveedor.Id }}">{{ proveedor.NombreProveedor }}</option>
+                            {% endfor %}                                    
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Imagen de producto</label>
+                        <input type="file" name="img[]" multiple>
+                        <p class="help-block">Formato de imagenes admitido png, jpg, gif, jpeg</p>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Descripción</label>
+                        <textarea name="prod-descripcion" style="margin: 0px;width: 100%;height: 100%;"></textarea>
+                    </div>                    
+                    <div class="form-group col-md-4">
+                        <label>Color</label>
+                        <select class="form-control" name="prod-color">
+                            {% for color in colors|sort %}
+                                <option value="{{ color }}">{{ color|capitalize }}</option>
+                            {% endfor %}                                    
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Promoción</label>
+                        <input type="number" class="form-control"  placeholder="Promoción" max="100" min="0" value="0" name="prod-promo">               
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>In Home</label>
+                        <input type="checkbox" name="prod-home">                        
+                    </div>
+                    <div class="form-group col-md-12">
+                        <p class="text-center"><button type="submit" class="btn btn-primary">Agregar a la tienda</button></p>
+                        <div id="res-form-add" style="width: 100%; text-align: center; margin: 0;"></div>
+                    </div>                    
+                </form>
+            </div>
+        </div>        
+        <div class="col-xs-12">
+            <br><br>
+            <div class="panel panel-info">
+                <div class="panel-heading text-center"><i class="fa fa-refresh fa-2x"></i><h3>Actualizar datos de producto</h3></div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="">
+                            <tr>
+                                <th class="text-center">Código</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Categoría</th>
+                                <th class="text-center">Precio</th>
+                                <th class="text-center">Modelo</th>
+                                <th class="text-center">Marca</th>
+                                <th class="text-center">Color</th>
+                                <th class="text-center">Und</th>
+                                <th class="text-center">Proveedor</th>
+                                <th class="text-center">In Home</th>
+                                <th class="text-center">Promo</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Actualizar</th>
+                                <th class="text-center" colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for producto in productos %}                                        
+                            <div id="update-product">
+                                <form method="post" action="{{ path("update_products") }}" id="res-update-product-{{ loop.index }}">
+                                    <tr>
+                                        <td>
+                                            <input class="form-control" type="hidden" name="code-old-prod" required="" value="{{producto.Id}}">
+                                            <div data-tip="{{producto.CodigoProd}}">
+                                                <input class="form-control" type="text" name="code-prod" maxlength="30" required="" value="{{producto.CodigoProd}}" readonly>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-tip="{{producto.NombreProd}}">
+                                                <input class="form-control" type="text" name="prod-name" maxlength="30" required="" value="{{producto.NombreProd}}">
+                                            </div>
+                                        </td>
+                                        <td>        
+                                            <div data-tip="{{producto.idcategoria.nombre}}">
+                                                <select class="form-control" name="prod-category">
+                                                    {% for categoria in categorias %}                                                    
+                                                        <option value="{{categoria.Id}}" {% if categoria.codigocat == producto.idcategoria.codigocat %}selected{% endif %}>{{categoria.Nombre}}</option>;                                                                                            
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-tip="COP {{producto.Precio}}">
+                                                <input class="form-control" type="text-area" name="price-prod" required="" value="{{producto.Precio}}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-tip="{{producto.Modelo}}">
+                                                <input class="form-control" type="tel" name="model-prod" required="" maxlength="20" value="{{producto.Modelo}}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-tip="{{producto.Marca}}">
+                                                <input class="form-control" type="text-area" name="marc-prod" maxlength="30" required="" value="{{producto.Marca}}">
+                                            </div>
+                                        </td>                                        
+                                        <td>
+                                            <div data-tip="{{producto.color}}">
+                                                <select class="form-control" name="color-prod">
+                                                    {% for color in colors|sort %}
+                                                        <option value="{{ color }}">{{ color|capitalize }}</option>
+                                                    {% endfor %}                                    
+                                                </select>
+                                            </div>
+                                        </td>                                                                                
+                                        <td><input class="form-control" type="text-area" name="stock-prod" maxlength="30" required="" value="{{producto.Stock}}"></td>
+                                        <td>                                                                                                                                               
+                                            <select class="form-control" name="prod-provider">;
+                                                {% for proveedor in proveedores %} 
+                                                    <option value="{{proveedor.Id}}" {% if proveedor.nitproveedor == producto.idproveedor.nitproveedor%}selected{% endif %}>{{proveedor.nombreproveedor}}</option>;
+                                                {% endfor %}
+                                            </select>                                                                                            
+                                        </td>
+                                        <td class="text-center">
+                                            <input type="checkbox" name="prod-home" {% if producto.inhome is defined and producto.inhome is not empty %}checked{% endif %}>      
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="number" name="promo-prod" min="0" maxlength="30" value="{{producto.inpromo}}">
+                                        </td>
+                                        <td>
+                                            <textarea name="description-prod" >{{producto.descripcion}}</textarea>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-sm btn-primary button-files-UPR" value="res-update-product-{{ loop.index }}" data-info="res-update-files-product-{{ loop.index }}">Fotos</button>
+                                            <div id="res-update-files-product-{{ loop.index }}" class = "load-files" style="width: 100%; margin:0px; padding:0px;"></div>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-sm btn-primary button-UPR" value="res-update-product-{{ loop.index }}">Actualizar</button>                                            
+                                        </td> 
+                                        <td class="text-center">                                            
+                                            <button type="submit" class="btn btn-sm btn-danger button-INA" value="res-update-product-{{ loop.index }}">Eliminar</button>
+                                        </td>                                         
+                                        <td>
+                                            <div id="res-update-product-{{ loop.index }}" style="width: 100%; margin:0px; padding:0px;"></div>                                        
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                        {% endfor %}                             
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

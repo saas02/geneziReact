@@ -1,0 +1,35 @@
+swiftmailer:    
+    default_mailer: default
+    mailers:
+        default:
+            transport: gmail
+            host: smtp.gmail.com
+            username: saas02@gmail.com
+            password: S3AlAmS383
+            port: 465
+            encryption: ssl
+            spool:
+                type: memory
+                path: 'C:\wamp\www\genezi\var\cache\dev/swiftmailer/spool'
+                id: null
+            url: null
+            command: '/usr/sbin/sendmail -bs'
+            timeout: 30
+            source_ip: null
+            local_domain: null
+            auth_mode: null
+            delivery_addresses: {  }
+            logging: true
+            delivery_whitelist: {  }
+
+#    transport: gmail
+#    host:      smtp.gmail.com
+#    username:  saas02@gmail.com
+#    password:  davidsantiago 
+#    port: 465
+#    encryption: ssl    
+#    spool:     { type: memory }
+#    port: 25
+#    host:       smtp.aviatur.com.co
+#    username:   noreply@aviatur.com.co
+#    spool: { type: 'memory' }

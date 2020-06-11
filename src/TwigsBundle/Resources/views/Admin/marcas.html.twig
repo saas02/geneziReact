@@ -1,0 +1,23 @@
+{# empty Twig template #}
+<div role="tabpanel" class="tab-pane fade" id="ImgMarcas">
+    <div class="row">
+        <div class="form-row col-xs-12 col-sm-12">            
+            <div id="form-row add-product">
+                <h2 class="text-primary text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar imagen (módulo de nuestras marcas)</h2>
+                <form role="form" action="{{ path("update_images_parameters") }}" method="post" enctype="multipart/form-data">                    
+                    <div class="form-group col-md-4">
+                        <label>Imagen de marcas</label>
+                        <input type="file" name="img[]" required multiple>
+                        <input type="hidden" name="marcas" value="1"> 
+                        <p class="help-block">Formato de imagenes admitido png, jpg, gif, jpeg</p>
+                    </div>                    
+                    <div class="form-group col-md-12">
+                        <p class="text-center"><button type="submit" class="btn btn-primary">Agregar imagen</button></p>
+                        <div id="res-form-add" style="width: 100%; text-align: center; margin: 0;"></div>
+                    </div>                    
+                </form>
+            </div>
+        </div>        
+    </div>
+</div>
+

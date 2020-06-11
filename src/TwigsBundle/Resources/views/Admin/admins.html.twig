@@ -1,0 +1,44 @@
+{# empty Twig template #}
+<div role="tabpanel" class="tab-pane fade" id="Admins">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <br><br>
+            <div id="add-admin">
+                <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar administrador</h2>
+                <form action="{{ path('create_admin') }}" method="post" role="form">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input class="form-control" type="text" name="admin-name" placeholder="Nombre" maxlength="20" pattern="[a-zA-Z]{4,20}" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input class="form-control" type="password" name="admin-pass" placeholder="Contraseña" required="">
+                    </div>
+                    <p class="text-center"><button type="submit" class="btn btn-primary">Agregar administrador</button></p>
+                    <br>
+                    <div id="res-form-add-admin" style="width: 100%; text-align: center; margin: 0;"></div>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <br><br>
+            <div id="del-admin">
+                <h2 class="text-danger text-center"><small><i class="fa fa-trash-o"></i></small>&nbsp;&nbsp;Eliminar administrador</h2>
+                <form action="process/deladmin.php" method="post" role="form">
+                    <div class="form-group">
+                        <label>Administradores</label>
+                        <select class="form-control" name="name-admin">
+                            {% for administrador in administradores %}
+                                <option value="{{ administrador.Id }}">{{ administrador.Nombre }}</option>
+                            {% endfor %}                            
+                        </select>
+                    </div>
+                    <p class="text-center"><button type="submit" class="btn btn-danger">Eliminar administrador</button></p>
+                    <br>
+                    <div id="res-form-del-admin" style="width: 100%; text-align: center; margin: 0;"></div>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-12"></div> 
+    </div>
+</div>

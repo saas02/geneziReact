@@ -1,0 +1,38 @@
+{# empty Twig template #}
+{% extends './App/base.html.twig' %}
+{% block body %}  
+    <body id="container-page-registration">
+        {% include './App/navigator.html.twig' %} 
+        <section id="form-registration">
+            <div class="container">            
+                <div class="row">
+                    <div class="page-header">
+                        <h1>Nosotros</h1>
+                    </div>  
+                    <div class="col-xs-6 col-sm-6 text-center">
+                        {% for key, info in parameters['nosotros'] %}                        
+                            {% if key != 'direccion' and key != 'telefono' and key != 'coordinates' and key != 'tokenMap' %}                                
+                                <div class="page-header">
+                                    <h3><b>{{ key|capitalize }}</b></h3>
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                    <h5>{{ info }}</h5>
+                                </div>&nbsp;
+                            {% endif %}                        
+                        {% endfor %}
+                    </div>
+                    <div class="col-xs-6 col-sm-6 text-center"> 
+                        <div class="page-header">
+                            <h3><b>Contáctenos</b></h3>
+                            <div id="mapid"></div>
+                            <b><h4>Dirrección: {{ parameters['nosotros']['direccion'] }}</h4></b>
+                            <b><h4>Teléfono: {{ parameters['nosotros']['telefono'] }}</h4></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+    {% include './App/footer.html.twig' %}                                     
+    {% include 'General/general_modal.html.twig' %}
+{% endblock %}

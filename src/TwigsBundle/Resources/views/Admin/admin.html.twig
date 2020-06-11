@@ -1,0 +1,48 @@
+{# empty Twig template #}
+{% extends './App/base.html.twig' %}
+{% block body %} 
+    <body id="container-page-configAdmin">
+        {% include './App/navigator.html.twig' %}           
+        <section id="prove-product-cat-config">
+            <div class="container">                
+                <div class="page-header">
+                  <h1>Panel de administración <small class="tittles-pages-logo">Genezi</small></h1>
+                </div>
+                {% if error_message is defined %}
+                    <div class="alert alert-info" role="alert">{{ error_message }}</div>
+                {% endif %}
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#Productos" role="tab" data-toggle="tab">Productos</a></li>
+                  <li role="presentation"><a href="#Proveedores" role="tab" data-toggle="tab">Proveedores</a></li>
+                  <li role="presentation"><a href="#Categorias" role="tab" data-toggle="tab">Categorías</a></li>
+                  <li role="presentation"><a href="#Admins" role="tab" data-toggle="tab">Admin</a></li>
+                  <li role="presentation"><a href="#Pedidos" role="tab" data-toggle="tab">Pedidos</a></li>
+                  <li role="presentation"><a href="#Contenidos" role="tab" data-toggle="tab">Contenidos</a></li>
+                  <li role="presentation"><a href="#ImgMarcas" role="tab" data-toggle="tab">Imagen Nuestras Marcas</a></li>
+                  <li role="presentation"><a href="#ImgRegistro" role="tab" data-toggle="tab">Imagen Registro</a></li>
+                </ul>
+                <div class="tab-content">
+                    <!--==============================Panel productos===============================-->
+                    {% include './Admin/productos.html.twig' %}   
+                    <!--==============================Panel Proveedores===============================-->
+                    {% include './Admin/proveedores.html.twig' %}   
+                    <!--==============================Panel Categorias===============================-->
+                    {% include './Admin/categorias.html.twig' %}   
+                    <!--==============================Panel Admins===============================-->
+                    {% include './Admin/admins.html.twig' %}   
+                    <!--==============================Panel pedidos===============================-->
+                    {% include './Admin/pedidos.html.twig' %}   
+                    <!--==============================Panel contenidos===============================-->
+                    {% include './Admin/contenidos.html.twig' %}   
+                    <!--==============================Panel Nuestras marcas===============================-->
+                    {% include './Admin/marcas.html.twig' %}   
+                    <!--==============================Panel Registro===============================-->
+                    {% include './Admin/registro.html.twig' %}   
+                </div>
+            </div>
+        </section>
+        {% include './App/footer.html.twig' %} 
+        {% include 'General/general_modal.html.twig' %}
+    </body>
+{% endblock %}

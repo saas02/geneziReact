@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <NS1:mbus xmlns:NS1="http://www.aviatur.com/soa/formato/mbus/response/version/1.0">
+            <NS1:response>
+                <NS1:header>
+                    <NS1:service>{service}</NS1:service>
+                    <NS1:invoker>{invoker}</NS1:invoker>
+                    <NS1:provider>{provider}</NS1:provider>
+                    <NS1:requestId>{requestId}</NS1:requestId>
+                </NS1:header>
+                <NS1:body>{xmlBody}</NS1:body>
+            </NS1:response>
+        </NS1:mbus>
+    </soapenv:Body>
+</soapenv:Envelope>

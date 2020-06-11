@@ -1,0 +1,82 @@
+{# empty Twig template #}
+{% extends './App/base.html.twig' %}
+{% block body %}  
+    <body id="container-page-index">
+        {% include './App/navigator.html.twig' %} 
+        <section id="infoproduct">
+            <div class="container">                                
+                <div class="table-title">
+                    <h3>Resumen de Compra</h3>
+                </div>                
+                <div class="table-title text-center">                    
+                    {% if ((response.message.responseCode != 'APPROVED') and (app.session.get('retry') != 1 or (app.session.get('retry') > 0 and app.session.get('retry') < 3))) %}
+                        <form class="inline-block condensed" action="{{ path('formulario')}}" method="POST">
+                            <input type="submit" value="Reintentar pago" class="btn btn-info">
+                            <input type="hidden" name="referenceCode" value="{{request.transaction.order.referenceCode}}">
+                        </form>                                            
+                    {% endif %}                
+                    {#<input type="submit" value="imprimir" class="btn btn-info">#}
+                </div>                
+                <table class="table-fill">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Datos de transacción</th>
+                            <th class="text-center">Datos de Cliente</th>                            
+                        </tr>
+                    </thead>
+                    <tbody class="table-hover">
+                        <tr>
+                            <td class="text-left">
+                                <label>Referencia:</label>  {{request.transaction.order.referenceCode}}
+                            </td>
+                            <td class="text-left">
+                                <label>Cliente: </label> {{request.transaction.payer.fullName}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <label>Total:</label>  {{request.transaction.order.additionalValues.TX_VALUE.currency}} {{request.transaction.order.additionalValues.TX_VALUE.value|number_format(0, '.', ',')}}
+                            </td>
+                            <td class="text-left">
+                                <label>Email: </label> {{request.transaction.payer.emailAddress}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <label>Código de Autorización:</label> {{ response.message.authorizationCode }}
+                            </td>
+                            <td class="text-left">
+                                <label>Teléfono: </label> {{request.transaction.payer.contactPhone}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <label>Estado de Transacción:</label>  {{response.message.responseCode}}
+                            </td>
+                            <td class="text-left">
+                                <label>Dirección: </label> {{request.transaction.payer.billingAddress.street1}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <label>Fecha de Transacción:</label>  {{response.message.operationDate}}
+                            </td>
+                            <td class="text-left"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <label>Código de Trazabilidad:</label>  {{response.message.trazabilityCode}}
+                            </td>
+                            <td class="text-left"></td>
+                        </tr>                        
+                    </tbody>
+                </table>                
+            </div>
+        </section>             
+        {% include './App/footer.html.twig' %}                                     
+        {% include 'General/general_modal.html.twig' %}
+    </body>
+{% endblock %}
+
+
+

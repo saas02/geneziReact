@@ -1,0 +1,109 @@
+{% extends './App/base_email.html.twig' %}
+{% block body %}
+    <section id="infoproduct">
+        <div class="container">  
+            <div class="col-xs-4">                
+                <p class="text-navbar tittles-pages-logo">Genezi Tecnología Led</p>
+            </div>
+            <div class="table-title">
+                <h3>Resumen de Compra</h3>
+            </div>                            
+            <table class="table-fill">
+                <thead>
+                    <tr>
+                        <th class="text-center">Datos de transacción</th>
+                        <th class="text-center">Datos de Cliente</th>                            
+                    </tr>
+                </thead>
+                <tbody class="table-hover">
+                    <tr>
+                        <td class="text-left">
+                            <label>Referencia:</label>  {{request.transaction.order.referenceCode}}
+                        </td>
+                        <td class="text-left">
+                            <label>Cliente: </label> {{request.transaction.payer.fullName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Total:</label>  {{request.transaction.order.additionalValues.TX_VALUE.currency}} {{request.transaction.order.additionalValues.TX_VALUE.value|number_format(0, '.', ',')}}
+                        </td>
+                        <td class="text-left">
+                            <label>Email: </label> {{request.transaction.payer.emailAddress}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Código de Autorización:</label> {{ response.message.authorizationCode }}
+                        </td>
+                        <td class="text-left">
+                            <label>Teléfono: </label> {{request.transaction.payer.contactPhone}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Estado de Transacción:</label>  {{response.message.responseCode}}
+                        </td>
+                        <td class="text-left">
+                            <label>Dirección: </label> {{request.transaction.payer.billingAddress.street1}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Fecha de Transacción:</label>  {{response.message.operationDate}}
+                        </td>
+                        <td class="text-left"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Código de Trazabilidad:</label>  {{response.message.trazabilityCode}}
+                        </td>
+                        <td class="text-left"></td>
+                    </tr> 
+                    <tr>
+                        <td class="text-center">
+                            <label><b>Prodcutos Comprados:</b></label>
+                        </td>
+                        <td class="text-left"></td>
+                    </tr>
+                    <tr>                        
+                        <td>                            
+                            <table class="table-fill">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Cantidad</th>
+                                        <th class="text-center">Nombre</th>
+                                        <th class="text-center">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-hover">
+                                    {% set total = 0 %}
+                                    {% for products in description %}                                                                        
+                                        {% for product in products %}                                        
+                                            <tr>
+                                                <td text-center>{{ product.cantidad }}</td>
+                                                <td text-center>{{ product.nombre }}</td>
+                                                <td text-center>COP {{ product.precio|number_format(0, '.', ',') }}</td>
+                                            </tr>   
+                                            {% set total = total + product.total %}
+                                        {% endfor %}                                                                                                          
+                                    {% endfor %}  
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <label><b>Valor Total:</b></label>  
+                                        </td>
+                                        <td>
+                                            COP {{ total|number_format(0, '.', ',') }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>                                                                                                
+                </tbody>
+            </table>                
+        </div>
+    </section>
+{% endblock %}
+

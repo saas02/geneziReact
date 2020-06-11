@@ -1,0 +1,111 @@
+{% block navigator %}    
+    <section id="container-carrito-compras">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div id="carrito-compras-tienda">
+                        <table class="table table-car"></table>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <p class="text-center" style="font-size: 80px;">
+                        <i class="fa fa-shopping-cart"></i>
+                    </p>
+                    <p class="text-center">
+                        <a href="{{ path('pedido') }}" class="btn btn-success btn-block"> Confirmar pedido</a>                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <nav id="navbar-auto-hidden">
+        <div class="row hidden-xs"><!-- Menu computadoras y tablets -->
+            <div class="col-xs-4">
+                <a href="{{ path('general_home') }}">
+                    <figure class="logo-navbar"></figure>
+                    <p class="text-navbar tittles-pages-logo">Genezi Tecnología Led</p>
+                </a>
+            </div>
+            <div class="col-xs-8">
+                <div class="contenedor-tabla pull-right">
+                    <div class="contenedor-tr">                                                
+                        <a href="{{ path('products') }}" class="table-cell-td">Productos</a>                     
+                        <a href="{{ path('general_info') }}" class="table-cell-td">Nosotros</a>
+                        {% if app.session.get('nombreAdmin') is defined and app.session.get('nombreAdmin') is not empty %}
+                            <a href="{{ path('general_admin') }}" class="table-cell-td">Administración</a>
+                            <a href="{{ path('general_corporative') }}" class="table-cell-td">Compras por mayor</a>  
+                            <a href="#" class="table-cell-td" data-toggle="modal" data-target=".modal-logout">
+                                <i class="fa fa-user"></i>&nbsp;&nbsp;{{ app.session.get('nombreAdmin') }}</i>
+                            </a>
+                        {% elseif app.session.get('nombreUser') is defined and app.session.get('nombreUser') is not empty %}                            
+                            {% if app.request.get('_route') != 'pedido' and app.request.get('_route') != 'formulario' and app.request.get('_route') != 'resumen_approved' and app.request.get('_route') != 'resumen_rejected' %}
+                                <a href="#" class="table-cell-td carrito-button-nav" data-toggle="tooltip" data-placement="bottom" title="Ver carrito de compras">
+                                    <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+                                </a>
+                            {% endif %}
+                            <a href="{{ path('general_corporative') }}" class="table-cell-td">Compras por mayor</a>  
+                            <a href="#" class="table-cell-td" data-toggle="modal" data-target=".modal-logout">
+                                <i class="fa fa-user"></i>&nbsp;&nbsp;{{ app.session.get('nombreUser') }}
+                            </a>
+                            {% else %}
+                                <a href="{{ path('register') }}" class="table-cell-td">Registro</a>
+                                {% if app.request.get('_route') != 'pedido' %}
+                                    <a href="#" class="table-cell-td carrito-button-nav" data-toggle="tooltip" data-placement="bottom" title="Ver carrito de compras">
+                                        <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+                                    </a>
+                                {% endif %}
+                                <a href="{{ path('general_corporative') }}" class="table-cell-td">Compras por mayor</a>  
+                                <a href="#" class="table-cell-td" data-toggle="modal" data-target=".modal-login">
+                                    <i class="fa fa-user"></i>&nbsp;&nbsp;Login
+                                </a>                                
+                        {% endif %}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row visible-xs"><!-- Mobile menu navbar -->
+            <div class="col-xs-12">
+                <button class="btn btn-default pull-left button-mobile-menu" id="btn-mobile-menu">
+                    <i class="fa fa-th-list"></i>&nbsp;&nbsp;Menú
+                </button>
+                {% if app.request.get('_route') != 'pedido' and app.request.get('_route') != 'formulario' and app.request.get('_route') != 'resumen_approved' and app.request.get('_route') != 'resumen_rejected' %}
+                    <a href="#" id="button-shopping-cart-xs" class="elements-nav-xs all-elements-tooltip carrito-button-nav" data-toggle="tooltip" data-placement="bottom" title="Ver carrito de compras">
+                        <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+                    </a>
+                {% endif %}
+                {% if app.session.get('nombreAdmin') is defined and app.session.get('nombreAdmin') is not empty %}
+                    <a href="#"  id="button-login-xs" class="elements-nav-xs" data-toggle="modal" data-target=".modal-logout">
+                        <i class="fa fa-user"></i>&nbsp; {{ app.session.get('nombreAdmin') }}
+                    </a>
+                {% elseif app.session.get('nombreUser') is defined and app.session.get('nombreUser') is not empty %}
+                    <a href="#"  id="button-login-xs" class="elements-nav-xs" data-toggle="modal" data-target=".modal-logout">
+                        <i class="fa fa-user"></i>&nbsp; {{ app.session.get('nombreUser') }}
+                    </a>
+                {% else %}
+                    <a href="#" data-toggle="modal" data-target=".modal-login" id="button-login-xs" class="elements-nav-xs">
+                        <i class="fa fa-user"></i>&nbsp; Iniciar Sesión
+                    </a> 
+                {% endif %}                
+            </div>
+        </div>
+        <div id="mobile-menu-list" class="hidden-sm hidden-md hidden-lg">
+            <br>
+            <h3 class="text-center tittles-pages-logo">Genezi</h3>
+            <button class="btn btn-default button-mobile-menu" id="button-close-mobile-menu">
+                <i class="fa fa-times"></i>
+            </button>
+            <br><br>
+            <ul class="list-unstyled text-center">
+                <li><a href="{{ path('general_home') }}">Inicio</a></li>
+                <li><a href="{{ path('products') }}">Productos</a></li>                 
+                <li><a href="{{ path('general_info') }}" class="table-cell-td">Nosotros</a></li>
+                <li><a href="{{ path('general_corporative') }}" class="table-cell-td">Compras por mayor</a></li>
+                    {% if app.session.get('nombreAdmin') is defined and app.session.get('nombreAdmin') is not empty %}
+                    <li><a href="{{ path('general_admin') }}">Administración</a></li>                    
+                    {% else %}
+                    <li><a href="{{ path('register') }}">Registro</a></li>
+                    {% endif %}                  
+            </ul>
+        </div>
+    </nav>
+{% endblock %}

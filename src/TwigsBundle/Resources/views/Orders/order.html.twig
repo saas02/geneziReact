@@ -1,0 +1,82 @@
+{# empty Twig template #}
+{% extends './App/base.html.twig' %}
+{% block body %}    
+    <body id="container-page-product">
+        {% include './App/navigator.html.twig' %}         
+        <section id="store">
+            <br>
+            <div class="container">
+                <div class="page-header">
+                    <h1>Genezi <small class="tittles-pages-logo">Shop</small></h1>
+                </div>
+                <br><br>
+                {% if error_message is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-xs-12">                        
+                        <div class="bd-example">
+                            <div class="table-responsive-sm">
+                                <form id="formorder" method="post" action="{{path('formulario')}}">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Cantidad</th>                                            
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Precio</th>                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% set total = 0 %}
+                                            {% set iteration = 0 %}
+                                            {% for car in carShoping %}
+                                                <tr class="prod_{{iteration}}">
+                                                    <td width="30%" align="center">
+                                                        {% set images = car.imagenes|split(';') %}
+                                                        <img src="{{ absolute_url(asset('assets/img-products/'~car.codigo~'/'~images[0])) }}" alt="{{ car.nombre }}" width="50%" heigth="50%">
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-input-pedido">
+                                                            <input id="cant_prod_{{iteration}}" class="form-control cant_prod" name="cant_prod_{{iteration}}" data-price="{{car.precio|number_format(0, '', '')}}" type="number" max="{{car.stock}}" value="1">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {{ car.nombre}}
+                                                    </td>
+                                                    <td>
+                                                        <label id="cant_prod_price_{{iteration}}">$ {{ car.precio|number_format(0, '.', '.') }}</label>
+                                                    </td>                                                    
+                                                    <td>
+                                                        <a data-cod="{{ car.codigo }}" data-iteration="{{iteration}}" class="btn btn-danger btn-sm carDelete"><i class="fa fa-trash"></i>&nbsp; Eliminar</a>
+                                                    </td>
+                                                </tr>  
+                                                {% set total = total + car.precio %}
+                                                {% set iteration = iteration + 1 %}
+                                            {% endfor %}
+                                            <tr>
+                                                <td align="right" colspan = "3">
+                                                    <h5>Total a pagar</h5>
+                                                </td>
+                                                <td>
+                                                    <label id="cant_total_price">$ {{ total|number_format(0, '.', '.') }}</label>
+                                                </td>
+                                                <td>
+                                                    <div class="message" style="display:none"></div>
+                                                    <button type="submit" class="btn btn-primary btn-lg">Pagar</button>                                                
+                                                </td>
+                                            </tr>                                                                                   
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>                                                     
+                        </div>
+                    </div>
+                </div>
+        </section>
+        {% include './App/footer.html.twig' %}                                     
+        {% include 'General/general_modal.html.twig' %}
+    </body>
+{% endblock %}

@@ -1,0 +1,86 @@
+{# empty Twig template #}
+{% extends './App/base.html.twig' %}
+{% block body %}  
+    <body id="container-page-index">
+        {% include './App/navigator.html.twig' %}   
+        <div class="jumbotron" id="jumbotron-index">
+            {% set count = 0 %}                        
+            <div id="myCarouselBanner" class="carousel slide carousel-fade" data-ride="carousel">
+                {# Indicators #}
+                <ol class="carousel-indicators">
+                    {% for banner in banners %}
+                        {% if loop.first %}{% set active = 'active' %}{% else %}{% set active = '' %}{% endif %}
+                        <li data-target="#carousel-{{ banner.codigoprod }}" data-slide-to="{{ loop.index0 }}" class="{{ active }}"></li>
+                    {% endfor %}
+                </ol>
+
+                {# Wrapper for slides #}
+                <div class="carousel-inner slide-carousel" role="listbox">
+                    {% for banner in banners %}
+                        {% set images = banner.Imagen|split(';') %}
+                        {% if loop.first %}{% set active = 'active' %}{% else %}{% set active = '' %}{% endif %}
+                        <div class="item {{ active }}">                                                        
+                            <img class="image-carousel" src="{{ absolute_url(asset('assets/img-products/'~banner.codigoprod~'/'~images[0])) }}">                            
+                        </div>
+                    {% endfor %}
+                </div>
+                {# Controls #}
+                <a class="left carousel-control slider-left" href="#myCarouselBanner" data-slide="prev">
+                  <i class="fa fa-chevron-left"></i>
+                </a>
+                <a class="right carousel-control slider-right" href="#myCarouselBanner" data-slide="next">
+                  <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>        
+        <section id="new-prod-index" class="section-home">
+            <div class="container">                                
+                <div class="page-header">
+                    <h1>Novedades <small>productos</small></h1>
+                </div>
+                <div class="row">
+                    <div id="products"></div>                    
+                </div>
+            </div>
+        </section>
+        {% if app.session.has('nombreAdmin') != 1 and app.session.has('nombreUser') != 1 %}
+            <section id="reg-info-index">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 text-center">
+                            <article style="margin-top:20%;">
+                                <p><i class="fa fa-users fa-4x"></i></p>
+                                <h3>Registrate</h3>
+                                <p>Registrese y hagase cliente de <span class="tittles-pages-logo">Genezi</span> para recibir las mejores ofertas y descuentos especiales de nuestros productos.</p>
+                                <p><a href="{{ path('register') }}" class="btn btn-info btn-block">Registrarse</a></p>   
+                            </article>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">                            
+                            <img src="{{ absolute_url(asset(imagesParameter.register)) }}" alt="electrodomesticos" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+        <section id="distribuidores-index">
+            <div class="container">
+                <div class="col-xs-12 col-sm-6">
+
+                </div>
+                <div class="col-xs-12 col-sm-6">
+
+                </div>
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h1>Nuestras <small style="color: #333;">Marcas</small></h1>
+                    </div>
+                    <br><br>
+                    <img src="{{ asset(imagesParameter.marcas) }}" alt="logos-marcas" class="img-responsive">
+                </div>
+            </div>
+        </section>
+        {% include './App/footer.html.twig' %}                                     
+        {% include 'General/general_modal.html.twig' %}
+    </body>
+{% endblock %}
+

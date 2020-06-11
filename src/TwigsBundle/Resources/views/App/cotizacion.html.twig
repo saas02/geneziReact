@@ -1,0 +1,45 @@
+{% extends './App/base_email.html.twig' %}
+{% block body %}
+    <section id="infoproduct">
+        <div class="container">  
+            <div class="col-xs-4">
+                <figure class="logo-navbar"></figure>
+                <p class="text-navbar tittles-pages-logo">Genezi Tecnología Led</p>
+            </div>
+            <div class="table-title">
+                <h3>Cotización</h3>
+            </div>                            
+            <table class="table-fill">
+                <thead>
+                    <tr>
+                        <th class="text-center">Datos de cotización</th>                        
+                    </tr>
+                </thead>
+                <tbody class="table-hover">
+                    <tr>
+                        <td class="text-left">
+                            <label>Nombre:</label> {{info.name}} {{info.surname}}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Telefono:</label>  {{info.phone}}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Email:</label> {{ info.email }}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <label>Mensaje:</label>  {{info.observations|raw}}
+                        </td>                        
+                    </tr>                    
+                </tbody>
+            </table>                
+        </div>
+    </section>
+{% endblock %}
+
+

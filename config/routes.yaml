@@ -1,0 +1,103 @@
+#general_home:
+#    path: /
+#    controller: App\GeneralBundle\Controller\GeneralController::index
+#    
+#register:
+#    path: /registro
+#    controller: App\GeneralBundle\Controller\GeneralController::register
+#    
+#products:
+#    path: /productos
+#    controller: App\GeneralBundle\Controller\GeneralController::products
+#    
+#close_session:
+#    path: /cerrar_sesion
+#    controller: App\GeneralBundle\Controller\GeneralController::closeSession
+
+general_login:
+    path: /login
+    controller: App\LoginBundle\Controller\LoginController::login
+    
+general_logout:
+    path: /logout
+    controller: App\LoginBundle\Controller\LoginController::logout
+        
+general_info:
+    path: /nosotros
+    controller: App\GeneralBundle\Controller\GeneralController::generalInfo
+    
+general_corporative:
+    path: /cliente-corporativo
+    controller: App\GeneralBundle\Controller\GeneralController::corporativeIndex
+    
+register_client:    
+    path: /registro-cliente
+    controller: App\LoginBundle\Controller\LoginController::registerClient
+
+general_admin:    
+    path: /administrador
+    controller: App\AdminBundle\Controller\AdminController::index
+    
+create_products:
+    path: /crear-producto
+    controller: App\AdminBundle\Controller\AdminController::createProduct
+    
+create_admin:
+    path: /crear-admin
+    controller: App\AdminBundle\Controller\AdminController::createAdmin
+    
+create_provider:
+    path: /crear-proveedor
+    controller: App\AdminBundle\Controller\AdminController::createProvider
+    
+create_category:
+    path: /crear-categoria
+    controller: App\AdminBundle\Controller\AdminController::createCategory
+    
+create_contents:    
+    path: /crear-contenidos
+    controller: App\AdminBundle\Controller\AdminController::createContent
+    
+contents_edit:    
+    path: /editar-contenido/{url}
+    controller: App\AdminBundle\Controller\AdminController::contentList
+    
+contents_view:    
+    path: /contenido/{url}
+    controller: App\AdminBundle\Controller\AdminController::contentList
+
+update_products:    
+    path: /actualizar-producto
+    controller: App\AdminBundle\Controller\AdminController::updateProduct
+    
+update_files_product:
+    path: /actualizar-fotos-producto
+    controller: App\AdminBundle\Controller\AdminController::updateFilesProduct
+    
+detail:    
+    path: /detalle/{name}
+    controller: App\AdminBundle\Controller\AdminController::detailProduct
+    
+pedido:
+    path: /pedido
+    controller: App\OrderBundle\Controller\OrderController::order
+    
+formulario:
+    path: /formulario
+    controller: App\OrderBundle\Controller\OrderController::formOrder
+    
+payment:
+    path: /pago
+    controller: App\OrderBundle\Controller\OrderController::payment
+    
+resumen_approved:
+    path: /resumen-compra-aprobada
+    controller: App\OrderBundle\Controller\OrderController::resume
+
+resumen_rejected:
+    path: /resumen-compra-rechazada
+    controller: App\OrderBundle\Controller\OrderController::resume
+    
+update_images_parameters:
+    path: /actualizar-imagen-parametrizable
+    controller: App\AdminBundle\Controller\AdminController::imagesParameters    

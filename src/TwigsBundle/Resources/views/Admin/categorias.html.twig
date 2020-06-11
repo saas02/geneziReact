@@ -1,0 +1,86 @@
+{# empty Twig template #}
+<div role="tabpanel" class="tab-pane fade" id="Categorias">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <br><br>
+            <div id="add-categori">
+                <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar categoría</h2>
+                <form action="{{ path('create_category') }}" method="post" role="form">
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input class="form-control" type="text" name="categ-code" placeholder="Código de categoria" maxlength="9" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input class="form-control" type="text" name="categ-name" placeholder="Nombre de categoria" maxlength="30" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <input class="form-control" type="text" name="categ-descrip" placeholder="Descripcióne de categoria" required="">
+                    </div>
+                    <p class="text-center"><button type="submit" class="btn btn-primary">Agregar categoría</button></p>
+                    <br>
+                    <div id="res-form-add-categori" style="width: 100%; text-align: center; margin: 0;"></div>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <br><br>
+            <div id="del-categori">
+                <h2 class="text-danger text-center"><small><i class="fa fa-trash-o"></i></small>&nbsp;&nbsp;Eliminar una categoría</h2>
+                <form action="process/delcategori.php" method="post" role="form">
+                    <div class="form-group">
+                        <label>Categorías</label>
+                        <select class="form-control" name="categ-code">
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.Id }}">{{ categoria.Nombre }}</option>
+                            {% endfor %} 
+                        </select>
+                    </div>
+                    <p class="text-center"><button type="submit" class="btn btn-danger">Eliminar categoría</button></p>
+                    <br>
+                    <div id="res-form-del-cat" style="width: 100%; text-align: center; margin: 0;"></div>
+                </form>
+            </div>
+        </div> 
+        <div class="col-xs-12">
+            <br><br>
+            <div class="panel panel-info">
+                <div class="panel-heading text-center"><i class="fa fa-refresh fa-2x"></i><h3>Actualizar categoría</h3></div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="">
+                            <tr>
+                                <th class="text-center">Código</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for categoria in categorias %}
+                            <div id="update-category">
+                                <form method="post" action="{{ path('create_category') }}" id="res-update-category-{{ loop.index }}">
+                                    <tr>
+                                        <td>
+                                            <input class="form-control" type="hidden" name="categ-code-old" maxlength="9" required="" value="{{categoria.CodigoCat}}">
+                                            <input readonly class="form-control" type="text" name="categ-code" maxlength="9" required="" value="{{categoria.CodigoCat}}">
+                                        </td>
+                                        <td><input class="form-control" type="text" name="categ-name" maxlength="30" required="" value="{{categoria.Nombre|capitalize}}"></td>
+                                        <td><input class="form-control" type="text-area" name="categ-descrip" required="" value="{{categoria.Descripcion}}"></td>
+                                        <td class="text-center">
+                                            <input name="categ-update" value="1" type="hidden">
+                                            <button type="submit" class="btn btn-sm btn-primary button-UC" value="res-update-category-{{ loop.index }}">Actualizar</button>
+                                            <div id="res-update-category-{{ loop.index }}" style="width: 100%; margin:0px; padding:0px;"></div>
+                                        </td>
+                                    </tr>
+                                </form>
+                            </div>
+                        {% endfor %}                             
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+{# empty Twig template #}
+{% extends './App/base.html.twig' %}
+{% block body %}    
+    <body id="container-page-product">
+        {% include './App/navigator.html.twig' %}           
+        <section id="store">
+            <br>
+            <div class="container">
+                <div class="page-header">
+                    <h1>Genezi <small class="tittles-pages-logo">Shop</small></h1>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-xs-12">                        
+                        <div class="bd-example">
+                            <div class="table-responsive-sm">
+                                <div class="frame js-last js-paymentForm">    
+                                <form id="formpayment" method="post" action="{{ path('payment') }}">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="Productos">
+                                        <div class="row">
+                                            <div class="form-row col-xs-12 col-sm-6">
+                                                {% include './Orders/payment_form.html.twig' %}                                                
+                                            </div>
+                                            <div class="form-row col-xs-12 col-sm-6">
+                                                {% include './Orders/facturation_form.html.twig' %}
+                                            </div>
+                                            {% if deviceSessionId is defined %}
+                                                <input type="hidden" readonly name="PD_deviceSessionId" value="{{deviceSessionId}}">
+                                            {% endif %}                                            
+                                        </div>
+                                    </div>                                    
+                                </form>
+                            </div>                                                     
+                        </div>
+                    </div>
+                </div>
+        </section>
+        {% include './App/footer.html.twig' %}                                     
+        {% include 'General/general_modal.html.twig' %}
+    </body>
+{% endblock %}

@@ -1,0 +1,41 @@
+{# empty Twig template #}
+{% extends './App/base.html.twig' %}
+{% block body %}  
+    <body id="container-page-product">
+        {% include './App/navigator.html.twig' %}   
+        <section id="infoproduct">            
+            <div class="container">
+                <div class="row">                                                                                
+                    <div class="form-group col-md-4">
+                        {% include './App/carousel.html.twig' with {'pictures': product} %}                    
+                    </div>                    
+                    <div class="form-group col-md-4">                        
+                        <h3 class="text-center"><b>Información de producto</b></h3>
+                        <h4><strong>Nombre: </strong>{{product.nombreprod}}</h4>
+                        <h4><strong>Función: </strong>{{product.modelo}}</h4>
+                        <h4><strong>Marca: </strong>{{product.marca}}</h4>                        
+                        <h4><strong>Color: </strong>{{product.color|capitalize}}</h4>  
+                        <h4><strong>Descripción: </strong>{{product.descripcion}}</h4>                        
+                    </div>
+                    <div class="form-group col-md-4">
+                        {% if product.inpromo is not empty and product.inpromo > 0 %}
+                            <div class="products_ribbon"><span>-{{ product.inpromo }}%</span></div>
+                        {% endif %}
+                        {% if product.inpromo is not empty and product.inpromo > 0 %}
+                            {% set precioPromo = product.precio - (product.precio * (product.inpromo/100)) %}
+                            <h3><strong>Precio: </strong><br><strike>COP {{product.precio|number_format(0, '.', '.')}}</strike></h3>
+                            <h3><font color="red"><p>COP {{ precioPromo|number_format(0, '.', ',') }}</p></font></h3>
+                            {% else %}
+                                <h3><strong>Precio: </strong><br>COP {{product.precio|number_format(0, '.', '.')}}</h3><br> 
+                        {% endif %}                                                
+                        <button value="{{product.codigoprod}}" class="btn btn-lg btn-success botonCarrito"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp; Añadir al carrito</button>                        
+                    </div>                    
+                </div>
+            </div>
+        </section>
+        {% include './App/footer.html.twig' %}                                     
+        {% include 'General/general_modal.html.twig' %}
+    </body>
+{% endblock %}
+
+

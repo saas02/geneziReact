@@ -1,0 +1,44 @@
+<h3 class="text-primary text-center"><small><i class="fa fa-plus"></i></small>Datos de Facturacion</h3>
+<div class="form-group col-md-6">
+    <label for="PD_doc_type">Tipo de documento:</label>
+    <select name="PD_doc_type" id="PD_doc_type" class="form-control">
+        <option value="CC">Cedula De Ciudadania</option>
+        <option value="PPN">Pasaporte</option>
+        <option value="NIT">Nit</option>
+        <option value="RUT">Rut</option>
+        <option value="LIC">Licencia De Conduccion</option>
+        <option value="CE">Cedula De Extranjeria</option>
+        <option value="TI">Tarjeta De Identidad</option>
+    </select>
+</div>
+<div class="form-group col-md-6">
+    <label for="PD_doc_num">Número de identificación</label>                    
+    <input type="text" name="PD_doc_num" id="PD_doc_num" value="{{cliente.nit}}" readonly class="form-control">
+</div>
+<div class="form-group col-md-6">
+    <label for="PD_name">Nombres</label>    
+    <input type="text" name="PD_name" id="PD_name" value="{{cliente.nombrecompleto}}" readonly class="form-control">
+</div>
+<div class="form-group col-md-6">
+    <label for="PD_last_name">Apellidos</label>                    
+    <input type="text" name="PD_last_name" id="PD_last_name" value="{{cliente.apellido}}" readonly class="form-control">
+</div>
+<div class="form-group col-md-6">
+    <label for="PD_email">Correo electrónico</label>    
+    <input type="text" name="PD_email" id="PD_email" value="{{cliente.email}}" readonly class="form-control">
+</div>
+<div class="form-group col-md-6">
+    <label for="PD_phone">Teléfono</label>                    
+    <input type="text" name="PD_phone" id="PD_phone" value="{{cliente.telefono}}" readonly class="form-control">
+</div>
+                    
+<div class="form-group col-md-6">              
+    <label for="PD_address">Dirección</label>                    
+    <input type="text" name="PD_address" id="PD_address" value="{{cliente.direccion}}" readonly class="form-control">
+</div>
+
+<div class="form-group col-md-12">     
+    <div class="jumbotron">
+        <a id="_submitPayment" class="btn btn-primary" name="_submit" type="submit" value="Comprar">TOTAL A PAGAR: $ {{ shoping['total']|number_format(0, '.', '.') }}</a>
+    </div>    
+</div>

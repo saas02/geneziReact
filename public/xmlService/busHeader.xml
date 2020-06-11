@@ -1,0 +1,19 @@
+<Request xmlns:mpa="http://amadeus.com/latam/mpa/2010/1">
+    <mpa:Command>{method}</mpa:Command>
+    <mpa:Version>1.0</mpa:Version>
+    <mpa:Language>es</mpa:Language>
+    <mpa:ResponseType>XML</mpa:ResponseType>
+    <mpa:Target>Test</mpa:Target>
+    <mpa:MaxExecutionTime>200</mpa:MaxExecutionTime>
+    <mpa:PageSize>0</mpa:PageSize>
+    <mpa:PageNumber>1</mpa:PageNumber>
+    <mpa:CacheRefresh>true</mpa:CacheRefresh>
+    <mpa:Message>{body}</mpa:Message>
+    <mpa:ProviderSettings>    
+        <mpa:ProviderSetting>        
+            <mpa:Setting Key="ProviderId" Value="{ProviderId}"></mpa:Setting>     
+            <mpa:Setting Key="PCC" Value="{officeId}"/>       
+            <mpa:Setting Key="Language" Value="ES"></mpa:Setting>    
+        </mpa:ProviderSetting>
+    </mpa:ProviderSettings>
+</Request>

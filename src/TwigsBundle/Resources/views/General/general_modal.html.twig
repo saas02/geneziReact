@@ -1,0 +1,78 @@
+{% block modal %}  
+    <!-- Modal login -->
+    <div class="modal fade modal-login" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" id="modal-form-login">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title text-center text-primary" id="myModalLabel">Iniciar sesión en Genezi</h4>
+                </div>
+                <form action="{{ path('general_login') }}" method="post" role="form" style="margin: 20px;" class="FormCatElec" data-form="login">
+                    <div class="form-group">
+                        <label><span class="glyphicon glyphicon-user"></span>&nbsp;Identificación</label>
+                        <input type="text" class="form-control" name="nombre-login" placeholder="Escribe tu nombre" required=""/>
+                    </div>
+                    <div class="form-group">
+                        <label><span class="glyphicon glyphicon-lock"></span>&nbsp;Contraseña</label>
+                        <input type="password" class="form-control" name="clave-login" placeholder="Escribe tu contraseña" required=""/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">Iniciar sesión</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>                    
+                    <div class="error" style="display:none;padding-left: 40%">
+                        <img src="{{ absolute_url(asset('assets/img/error.png')) }}" class="center-all-contens"><br>
+                    </div>
+                    <div class="ResFormL" style="width: 100%; text-align: center; margin: 0;"></div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal login -->
+    
+    <!-- Modal carrito -->
+    <div class="modal fade modal-carrito" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="padding: 20px;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <br>
+                <p class="text-center"><i class="fa fa-shopping-cart fa-5x"></i></p>
+                <p class="text-center">El producto se añadio al carrito</p>                
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal carrito -->
+
+    <!-- Modal logout -->
+    <div class="modal fade modal-logout" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="padding: 20px;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <br>
+                <p class="text-center">¿Quieres cerrar la sesión?</p>
+                <p class="text-center"><i class="fa fa-exclamation-triangle fa-5x"></i></p>
+                <p class="text-center">
+                    <a href="{{ path("general_logout") }}" class="btn btn-primary btn-sm">Cerrar la sesión</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal logout -->
+    
+    
+    <!-- Modal detalle -->
+    <div class="modal fade modal-detail" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="padding: 20px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="imgTittle"></div>
+                <br>
+                <div class="imgFormL">
+                    {% if producto is defined and producto is not empty %}                    
+                        {% include './App/carousel.html.twig' with {'pictures': producto} %}                        
+                    {% endif %}                
+                </div>                
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal detalle -->
+    
+{% endblock %}                

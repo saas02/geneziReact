@@ -1,0 +1,71 @@
+{# empty Twig template #}    
+<div role="tabpanel" class="tab-pane fade" id="Contenidos">
+    <div class="row">        
+        <div class="col-xs-12 col-sm-12">
+            <br><br>
+            <div class="form-group">
+                <form id="contentsAdmin" name="contentsAdmin" role="form" action="{{ path("create_contents") }}" method="post" enctype="multipart/form-data">                    
+                    <div class="form-group col-md-4">
+                        <label>Tìtulo</label>
+                        <input type="text" class="form-control"  placeholder="Tìtulo" required maxlength="30" name="cont_titulo">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Descripciòn</label>
+                        <input type="text" class="form-control"  placeholder="Descripciòn" required maxlength="30" name="cont_descripcion">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Palabra Clave</label>
+                        <input type="text" class="form-control"  placeholder="Palabra Clave" required maxlength="30" name="cont_clave">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Url</label>
+                        <input type="text" class="form-control"  placeholder="url" required maxlength="30" name="cont_url">
+                    </div>                                                                
+                    <div class="form-group col-md-12">
+                        <textarea name="cont_info" id="cont_info" required></textarea>
+                    </div>                    
+                    <div class="form-group col-md-12">
+                        <div id="res-form-contenido"></div>
+                        <input id="_submit" class="btn btn-primary" name="_submit" type="submit" value="Guardar">
+                    </div>                    
+                </form>
+            </div>            
+        </div>
+        <div class="col-xs-12">
+            <br><br>
+            <div class="panel panel-info">
+                <div class="panel-heading text-center"><i class="fa fa-refresh fa-2x"></i><h3>Actualizar Contenidos</h3></div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="">
+                            <tr>
+                                <th class="text-center">Título</th>
+                                <th class="text-center">Descripcion</th>
+                                <th class="text-center">Url</th>
+                                <th class="text-center">Ver</th>
+                                <th class="text-center">Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contenido in contenidos %}                                                                
+                                <tr>
+                                    <td>                                        
+                                        <input readonly class="form-control" type="text" value="{{contenido.title|capitalize}}">
+                                    </td>
+                                    <td><input class="form-control" type="text" value="{{contenido.description|capitalize}}"></td>
+                                    <td><input class="form-control" type="text" name="categ-descrip" value="{{contenido.url}}"></td>
+                                    <td class="text-center">                                              
+                                        <a href="{{ url('contents_view', {url: contenido.url}) }}"><button type="submit" class="btn btn-success">Ver</button></a>
+                                    </td>
+                                    <td class="text-center">                                              
+                                        <a href="{{ url('contents_edit', {url: contenido.url}) }}"><button type="submit" class="btn btn-primary">Editar</button></a>
+                                    </td>
+                                </tr>                                
+                            {% endfor %}                             
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

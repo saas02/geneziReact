@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.aviatur.com/soa/formato/mbus/request/version/1.0">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns:mbus>
+            <ns:request>
+                <ns:header>
+                    <ns:service>{service}</ns:service>
+                    <ns:invoker>{invoker}</ns:invoker>
+                    <ns:provider>{provider}</ns:provider>
+                    <ns:requestId>{requestId}</ns:requestId>
+                </ns:header>
+                <ns:body>{xmlBody}</ns:body>
+            </ns:request>
+        </ns:mbus>
+    </soapenv:Body>
+</soapenv:Envelope>

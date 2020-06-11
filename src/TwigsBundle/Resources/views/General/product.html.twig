@@ -1,0 +1,33 @@
+{% set count = 0 %}                        
+{% for producto in productos %}
+    <div class="col-xs-12 col-sm-6 col-md-3">
+        {% if producto.inpromo is not empty and producto.inpromo > 0 %}
+            <div class="products_ribbon"><span>-{{ producto.inpromo }}%</span></div>
+        {% endif %}
+        <div class="thumbnail">                                                                
+            {% set images = producto.Imagen|split(';') %}
+            <img class="imgSize productImg" data-img="{{ producto.CodigoProd }}" data-toggle="modal" data-target=".modal-detail" src="{{ absolute_url(asset('assets/img-products/'~producto.codigoprod~'/'~images[0])) }}">
+            <div class="caption">
+                <h3>{{ producto.nombreprod }}</h3>
+                <p>{{ producto.marca }}</p>  
+                <p>Color: {{ producto.color|capitalize }}</p>                                 
+                {% if producto.inpromo is not empty and producto.inpromo > 0 %}
+                    {% set precioPromo = producto.precio - (producto.precio * (producto.inpromo/100)) %}
+                    <p>COP <strike>{{ producto.precio|number_format(0, '.', ',') }}</strike></p>                                        
+                    <font color="red"><p>COP {{ precioPromo|number_format(0, '.', ',') }}</p></font>
+                    {% else %}
+                        <p>COP {{ producto.precio|number_format(0, '.', ',') }}</p>
+                {% endif %}                                         
+                <p class="text-center">
+                    <a href="{{ path('detail', { 'name' : encrypt(producto.codigoprod) }) }}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>&nbsp; Detalles</a>&nbsp;&nbsp;
+                    <button value="{{ producto.CodigoProd }}" class="btn btn-success btn-sm botonCarrito"><i class="fa fa-shopping-cart"></i>&nbsp; Añadir</button>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    {% set count = count + 1 %}
+    {% if count is divisible by(filas) %}
+        <div class="clearfix"></div>
+    {% endif %}  
+{% endfor %}
